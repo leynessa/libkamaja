@@ -1,369 +1,442 @@
 <!DOCTYPE html>
 <html lang="et">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Liblikate Tuvastaja - Liblikamaja</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Liblikate Tuvastaja - Liblikamaja</title>
+ <style>
+   * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
 
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #E8F5E8, #F0F8F0);
-    }
+   html, body {
+     height: 100%;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+     background: #fafafa;
+     color: #1a1a1a;
+   }
 
-    .container {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+   .container {
+     height: 100vh;
+     display: flex;
+     flex-direction: column;
+   }
 
-    /* Header */
-    .header {
-      background: linear-gradient(135deg, #4CAF50, #45a049);
-      color: white;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 1000;
-    }
+   /* Header */
+   .header {
+     background: white;
+     border-bottom: 1px solid #e5e5e5;
+     padding: 1rem 2rem;
+     backdrop-filter: blur(20px);
+     position: sticky;
+     top: 0;
+     z-index: 100;
+   }
 
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+   .header-content {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     max-width: 1400px;
+     margin: 0 auto;
+   }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
+   .logo {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: #1a1a1a;
+     letter-spacing: -0.02em;
+   }
 
-    .butterfly-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+   .butterfly-icon {
+     width: 32px;
+     height: 32px;
+     background: linear-gradient(135deg, #22c55e, #16a34a);
+     border-radius: 8px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 16px;
+     color: white;
+   }
 
-    .header-info {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      font-size: 0.9rem;
-    }
+   .header-badge {
+     background: #f0f9ff;
+     color: #0369a1;
+     padding: 0.375rem 0.75rem;
+     border-radius: 6px;
+     font-size: 0.75rem;
+     font-weight: 500;
+     border: 1px solid #e0f2fe;
+   }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 12px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-    }
+   /* Main Content */
+   .main-content {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     padding: 2rem;
+     gap: 1.5rem;
+     max-width: 1400px;
+     margin: 0 auto;
+     width: 100%;
+   }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #4CAF50;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
+   .hero-section {
+     text-align: center;
+     margin-bottom: 1rem;
+   }
 
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
+   .hero-title {
+     font-size: 2.5rem;
+     font-weight: 700;
+     color: #1a1a1a;
+     margin-bottom: 0.5rem;
+     letter-spacing: -0.04em;
+     line-height: 1.1;
+   }
 
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      gap: 1rem;
-    }
+   .hero-subtitle {
+     font-size: 1.125rem;
+     color: #6b7280;
+     font-weight: 400;
+     margin-bottom: 1.5rem;
+     line-height: 1.5;
+   }
 
-    .app-info {
-      background: white;
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      border-left: 4px solid #4CAF50;
-    }
+   .feature-pills {
+     display: flex;
+     justify-content: center;
+     gap: 0.75rem;
+     flex-wrap: wrap;
+     margin-bottom: 1rem;
+   }
 
-    .app-info h1 {
-      color: #2E7D32;
-      margin-bottom: 0.5rem;
-      font-size: 1.8rem;
-    }
+   .pill {
+     background: #f8fafc;
+     color: #475569;
+     padding: 0.5rem 1rem;
+     border-radius: 50px;
+     font-size: 0.875rem;
+     font-weight: 500;
+     border: 1px solid #e2e8f0;
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+   }
 
-    .app-info p {
-      color: #666;
-      margin-bottom: 1rem;
-    }
+   .pill-icon {
+     font-size: 0.875rem;
+   }
 
-    .features {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+   /* App Container */
+   .app-wrapper {
+     flex: 1;
+     position: relative;
+     min-height: 0;
+   }
 
-    .feature-tag {
-      background: #E8F5E8;
-      color: #2E7D32;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: 1px solid #4CAF50;
-    }
+   .app-container {
+     width: 100%;
+     height: 100%;
+     background: white;
+     border-radius: 16px;
+     overflow: hidden;
+     box-shadow: 
+       0 1px 3px rgba(0, 0, 0, 0.1),
+       0 1px 2px rgba(0, 0, 0, 0.06);
+     border: 1px solid #e5e7eb;
+     position: relative;
+   }
 
-    /* App Container */
-    .app-container {
-      flex: 1;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      position: relative;
-      min-height: 0; /* Important for flex child */
-    }
+   iframe {
+     border: none;
+     width: 100%;
+     height: 100%;
+     display: block;
+     border-radius: 16px;
+   }
 
-    .app-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #4CAF50, #45a049, #4CAF50);
-      z-index: 1;
-    }
+   /* Loading State */
+   .loading-overlay {
+     position: absolute;
+     inset: 0;
+     background: white;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     z-index: 10;
+     transition: all 0.3s ease;
+     border-radius: 16px;
+   }
 
-    iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+   .loading-overlay.hidden {
+     opacity: 0;
+     pointer-events: none;
+   }
 
-    /* Loading Overlay */
-    .loading-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: opacity 0.3s ease;
-    }
+   .spinner {
+     width: 32px;
+     height: 32px;
+     border: 2px solid #f3f4f6;
+     border-top: 2px solid #22c55e;
+     border-radius: 50%;
+     animation: spin 1s linear infinite;
+     margin-bottom: 1rem;
+   }
 
-    .loading-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
 
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #E8F5E8;
-      border-top: 4px solid #4CAF50;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 1rem;
-    }
+   .loading-text {
+     color: #6b7280;
+     font-size: 0.875rem;
+     font-weight: 500;
+   }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+   /* Footer */
+   .footer {
+     background: white;
+     border-top: 1px solid #e5e5e5;
+     padding: 1rem 2rem;
+     text-align: center;
+     margin-top: auto;
+   }
 
-    .loading-text {
-      color: #666;
-      font-size: 0.9rem;
-    }
+   .footer-content {
+     max-width: 1400px;
+     margin: 0 auto;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 2rem;
+     font-size: 0.875rem;
+     color: #6b7280;
+   }
 
-    /* Footer */
-    .footer {
-      background: #2E7D32;
-      color: white;
-      padding: 0.8rem 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-    }
+   .footer-links {
+     display: flex;
+     gap: 1.5rem;
+   }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+   .footer-links a {
+     color: #6b7280;
+     text-decoration: none;
+     transition: color 0.2s;
+     font-weight: 500;
+   }
 
-    .footer-links {
-      display: flex;
-      gap: 1rem;
-    }
+   .footer-links a:hover {
+     color: #22c55e;
+   }
 
-    .footer-links a {
-      color: #A5D6A7;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+   /* Responsive Design */
+   @media (max-width: 1024px) {
+     .main-content {
+       padding: 1.5rem;
+     }
+     
+     .hero-title {
+       font-size: 2rem;
+     }
+     
+     .hero-subtitle {
+       font-size: 1rem;
+     }
+   }
 
-    .footer-links a:hover {
-      color: white;
-    }
+   @media (max-width: 768px) {
+     .header {
+       padding: 1rem;
+     }
+     
+     .header-content {
+       flex-direction: column;
+       gap: 1rem;
+     }
+     
+     .header-badge {
+       font-size: 0.6875rem;
+       padding: 0.25rem 0.5rem;
+     }
+     
+     .main-content {
+       padding: 1rem;
+       gap: 1rem;
+     }
+     
+     .hero-title {
+       font-size: 1.75rem;
+     }
+     
+     .hero-subtitle {
+       font-size: 0.9375rem;
+     }
+     
+     .feature-pills {
+       gap: 0.5rem;
+     }
+     
+     .pill {
+       font-size: 0.8125rem;
+       padding: 0.375rem 0.75rem;
+     }
+     
+     .footer-content {
+       flex-direction: column;
+       gap: 1rem;
+     }
+   }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .header {
-        padding: 0.8rem 1rem;
-      }
-      
-      .header-content {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      
-      .header-info {
-        font-size: 0.8rem;
-      }
-      
-      .logo {
-        font-size: 1.3rem;
-      }
-      
-      .main-content {
-        padding: 0.5rem;
-      }
-      
-      .app-info {
-        padding: 1rem;
-      }
-      
-      .app-info h1 {
-        font-size: 1.5rem;
-      }
-      
-      .features {
-        gap: 0.5rem;
-      }
-      
-      .feature-tag {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.8rem;
-      }
-      
-      .footer-content {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
+   @media (max-width: 480px) {
+     .header-badge {
+       display: none;
+     }
+     
+     .logo {
+       font-size: 1.125rem;
+     }
+     
+     .hero-title {
+       font-size: 1.5rem;
+     }
+     
+     .feature-pills {
+       flex-direction: column;
+       align-items: center;
+       max-width: 300px;
+       margin: 0 auto 1rem;
+     }
+     
+     .pill {
+       width: 100%;
+       justify-content: center;
+     }
+   }
 
-    @media (max-width: 480px) {
-      .header-info {
-        display: none;
-      }
-    }
-  </style>
+   /* Micro-interactions */
+   .app-container {
+     transition: all 0.2s ease;
+   }
+
+   .app-container:hover {
+     box-shadow: 
+       0 4px 6px -1px rgba(0, 0, 0, 0.1),
+       0 2px 4px -1px rgba(0, 0, 0, 0.06);
+   }
+
+   .pill {
+     transition: all 0.2s ease;
+   }
+
+   .pill:hover {
+     background: #f1f5f9;
+     border-color: #cbd5e1;
+   }
+
+   /* Focus states */
+   .app-container:focus-within {
+     outline: 2px solid #22c55e;
+     outline-offset: 2px;
+   }
+ </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <div class="butterfly-icon">🦋</div>
-          <span>Liblikamaja</span>
-        </div>
-        <div class="header-info">
-          <div class="status-indicator">
-            <div class="status-dot"></div>
-            <span>Rakendus töötab</span>
-          </div>
-          <div>AI-põhine tuvastamine</div>
-        </div>
-      </div>
-    </header>
+ <div class="container">
+   <!-- Header -->
+   <header class="header">
+     <div class="header-content">
+       <div class="logo">
+         <div class="butterfly-icon">🦋</div>
+         <span>Liblikamaja</span>
+       </div>
+       <div class="header-badge">
+         AI-põhine tuvastamine
+       </div>
+     </div>
+   </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- App Info -->
-      <section class="app-info">
-        <h1>Liblikate Tuvastaja</h1>
-        <p>Tuvasta liblikaid kiirelt ja täpselt meie AI-põhise tehnoloogia abil</p>
-        <div class="features">
-          <span class="feature-tag">📸 Foto tuvastamine</span>
-          <span class="feature-tag">📱 Reaalajas kaamera</span>
-          <span class="feature-tag">🔍 Täpne tuvastamine</span>
-          <span class="feature-tag">🇪🇪 Eesti liigid</span>
-        </div>
-      </section>
+   <!-- Main Content -->
+   <main class="main-content">
+     <!-- Hero Section -->
+     <section class="hero-section">
+       <h1 class="hero-title">Liblikate Tuvastaja</h1>
+       <p class="hero-subtitle">Tuvasta liblikaid kiirelt ja täpselt meie AI-põhise tehnoloogia abil</p>
+       
+       <div class="feature-pills">
+         <div class="pill">
+           <span class="pill-icon">📸</span>
+           <span>Foto tuvastamine</span>
+         </div>
+         <div class="pill">
+           <span class="pill-icon">📱</span>
+           <span>Reaalajas kaamera</span>
+         </div>
+         <div class="pill">
+           <span class="pill-icon">🔍</span>
+           <span>Täpne tuvastamine</span>
+         </div>
+         <div class="pill">
+           <span class="pill-icon">🇪🇪</span>
+           <span>Eesti liigid</span>
+         </div>
+       </div>
+     </section>
 
-      <!-- App Container -->
-      <div class="app-container">
-        <div class="loading-overlay" id="loadingOverlay">
-          <div class="spinner"></div>
-          <div class="loading-text">Laadin rakendust...</div>
-        </div>
-        <iframe 
-          src="https://leynessa-libkamaja-id.hf.space" 
-          allow="camera; microphone"
-          onload="hideLoading()"
-        ></iframe>
-      </div>
-    </main>
+     <!-- App Container -->
+     <div class="app-wrapper">
+       <div class="app-container">
+         <div class="loading-overlay" id="loadingOverlay">
+           <div class="spinner"></div>
+           <div class="loading-text">Laadin rakendust...</div>
+         </div>
+         <iframe 
+           src="https://leynessa-libkamaja-id.hf.space" 
+           allow="camera; microphone"
+           onload="hideLoading()"
+           title="Liblikate Tuvastaja"
+         ></iframe>
+       </div>
+     </div>
+   </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div>&copy; 2025 Liblikamaja - Liblikate tuvastamine</div>
-        <div class="footer-links">
-          <a href="#privaatsus">Privaatsus</a>
-          <a href="#kasutustingimused">Kasutustingimused</a>
-          <a href="#kontakt">Kontakt</a>
-        </div>
-      </div>
-    </footer>
-  </div>
+   <!-- Footer -->
+   <footer class="footer">
+     <div class="footer-content">
+       <div>&copy; 2025 Liblikamaja</div>
+       <div class="footer-links">
+         <a href="#privaatsus">Privaatsus</a>
+         <a href="#kasutustingimused">Kasutustingimused</a>
+         <a href="#kontakt">Kontakt</a>
+       </div>
+     </div>
+   </footer>
+ </div>
 
-  <script>
-    function hideLoading() {
-      const overlay = document.getElementById('loadingOverlay');
-      if (overlay) {
-        overlay.classList.add('hidden');
-        setTimeout(() => {
-          overlay.style.display = 'none';
-        }, 300);
-      }
-    }
+ <script>
+   function hideLoading() {
+     const overlay = document.getElementById('loadingOverlay');
+     if (overlay) {
+       overlay.classList.add('hidden');
+       setTimeout(() => {
+         overlay.style.display = 'none';
+       }, 300);
+     }
+   }
 
+   // Auto-hide loading after 5 seconds
+   setTimeout(hideLoading, 5000);
+ </script>
+</body>
+</html>
     // Hide loading after 5 seconds even if iframe doesn't load
     setTimeout(hideLoading, 5000);
   </script>
