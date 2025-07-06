@@ -145,8 +145,8 @@
      flex: 1;
      display: flex;
      flex-direction: column;
-     padding: 3rem 2rem;
-     gap: 3rem;
+     padding: 2rem 2rem;
+     gap: 2rem;
      max-width: 1600px;
      margin: 0 auto;
      width: 100%;
@@ -166,12 +166,12 @@
      font-size: 0.875rem;
      font-weight: 600;
      border: 1px solid rgba(34, 197, 94, 0.3);
-     margin-bottom: 2rem;
+     margin-bottom: 1.5rem;
      backdrop-filter: blur(10px);
    }
 
    .hero-title {
-     font-size: 4rem;
+     font-size: 3.5rem;
      font-weight: 800;
      background: linear-gradient(135deg, #f1f5f9, #22c55e);
      -webkit-background-clip: text;
@@ -183,10 +183,10 @@
    }
 
    .hero-subtitle {
-     font-size: 1.25rem;
+     font-size: 1.125rem;
      color: #cbd5e1;
      font-weight: 400;
-     margin-bottom: 2rem;
+     margin-bottom: 1.5rem;
      line-height: 1.6;
      max-width: 600px;
      margin-left: auto;
@@ -197,7 +197,7 @@
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
      gap: 1rem;
-     margin-top: 2rem;
+     margin-top: 1.5rem;
    }
 
    .feature-card {
@@ -247,11 +247,13 @@
      line-height: 1.4;
    }
 
-   /* App Container */
+   /* App Container - Made much bigger */
    .app-wrapper {
      flex: 1;
      position: relative;
      min-height: 0;
+     /* Increased minimum height for better visibility */
+     min-height: 700px;
    }
 
    .app-container {
@@ -341,7 +343,7 @@
      background: rgba(255, 255, 255, 0.05);
      backdrop-filter: blur(20px);
      border-top: 1px solid rgba(34, 197, 94, 0.2);
-     padding: 2rem;
+     padding: 1.5rem 2rem;
      margin-top: auto;
    }
 
@@ -390,11 +392,15 @@
    /* Responsive Design */
    @media (max-width: 1200px) {
      .main-content {
-       padding: 2rem 1.5rem;
+       padding: 1.5rem;
      }
      
      .hero-title {
        font-size: 3rem;
+     }
+     
+     .app-wrapper {
+       min-height: 600px;
      }
    }
 
@@ -414,8 +420,8 @@
      }
      
      .main-content {
-       padding: 1.5rem 1rem;
-       gap: 2rem;
+       padding: 1rem;
+       gap: 1.5rem;
      }
      
      .hero-title {
@@ -423,7 +429,7 @@
      }
      
      .hero-subtitle {
-       font-size: 1.125rem;
+       font-size: 1rem;
      }
      
      .feature-grid {
@@ -433,6 +439,10 @@
      
      .feature-card {
        padding: 1rem;
+     }
+     
+     .app-wrapper {
+       min-height: 500px;
      }
      
      .footer-content {
@@ -459,6 +469,10 @@
      
      .feature-grid {
        grid-template-columns: 1fr;
+     }
+     
+     .app-wrapper {
+       min-height: 450px;
      }
      
      .footer-links {
@@ -515,9 +529,9 @@
            <div class="feature-desc">Täpne masinõppe tehnoloogia</div>
          </div>
          <div class="feature-card">
-           <span class="feature-icon">🇪🇪</span>
-           <div class="feature-title">Eesti liigid</div>
-           <div class="feature-desc">Optimeeritud kohalikeks liikideks</div>
+           <span class="feature-icon">🦋</span>
+           <div class="feature-title">Paljud liigid</div>
+           <div class="feature-desc">Lai valik liblikaliike</div>
          </div>
          <div class="feature-card">
            <span class="feature-icon">⚡</span>
